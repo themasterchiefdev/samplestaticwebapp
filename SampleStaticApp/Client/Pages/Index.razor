@@ -1,0 +1,25 @@
+﻿@page "/"
+@inject HttpClient _http
+<h1>Hello, world!</h1>
+
+Welcome to your new app @_queryString.
+
+<SurveyPrompt Title="How is Blazor working for you?"/>
+
+
+@code
+{
+    private string _queryString=string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _queryString = await _http.GetStringAsync("/api/Function1");
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+    }
+}
